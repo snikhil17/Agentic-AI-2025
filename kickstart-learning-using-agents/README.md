@@ -56,10 +56,4 @@ Whether you're into **Cricket**, **Harry Potter**, or **Music**, this app brings
 
 ---
 
-## 🔧 Local Setup
 
-```bash
-git clone https://github.com/your-username/kickstart-genai-learning.git
-cd kickstart-genai-learning
-pip install -r requirements.txt
-streamlit run app.py  # or `python main.py` if using FastAPI
