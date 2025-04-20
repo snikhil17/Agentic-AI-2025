@@ -44,11 +44,12 @@ pip install -r requirements.txt
 Navigate to the desired module and follow the instructions in the respective README.
 
 ## Directory Structure
-
+```bash
 Agentic-AI-2025/
 ├── kickstart-learning-using-agents/
 │   ├── README.md
 │   └── ...
 ├── requirements.txt
 └── README.md
+```
 
