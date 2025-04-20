@@ -25,7 +25,7 @@ Whether you're into **Cricket**, **Harry Potter**, or **Music**, this app brings
 
 ## 🖼️ UI Preview
 
-![Kickstart App UI](Agentic-AI-2025/kickstart-learning-using-agents/images/landing_page.png)
+![Kickstart App UI]([Agentic-AI-2025/kickstart-learning-using-agents/images/landing_page.png](https://github.com/snikhil17/Agentic-AI-2025/blob/main/kickstart-learning-using-agents/images/landing_page.png))
 
 
 
