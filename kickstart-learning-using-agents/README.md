@@ -23,10 +23,15 @@ Whether you're into **Cricket**, **Harry Potter**, or **Music**, this app brings
 
 ---
 
+
 ## 🖼️ UI Preview
 
-![Kickstart App UI](https://github.com/snikhil17/Agentic-AI-2025/blob/main/kickstart-learning-using-agents/images/landing_page.png)
-
+![Landing Page](https://github.com/snikhil17/Agentic-AI-2025/blob/main/kickstart-learning-using-agents/images/landing_page.png?raw=true)
+![Example using ADK by Google](https://github.com/snikhil17/Agentic-AI-2025/blob/main/kickstart-learning-using-agents/images/ADK_example.png?raw=true)
+![Adaptive Learning Pathway-1](https://github.com/snikhil17/Agentic-AI-2025/blob/main/kickstart-learning-using-agents/images/initial_pathway.png?raw=true)
+![Adaptive Learning Pathway-2](https://github.com/snikhil17/Agentic-AI-2025/blob/main/kickstart-learning-using-agents/images/learning_pathway_2.png?raw=true)
+![Explanation of Learning Pathway](https://github.com/snikhil17/Agentic-AI-2025/blob/main/kickstart-learning-using-agents/images/explanation_kickstart.png?raw=true)
+![Relevant Links](https://github.com/snikhil17/Agentic-AI-2025/blob/main/kickstart-learning-using-agents/images/relevant_links.png?raw=true)
 
 
 ---
