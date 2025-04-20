@@ -46,8 +46,8 @@ def perform_retrieval(student_profile: dict) -> dict:
     document_texts = [doc.page_content for doc in all_docs]
     combined_text = "\n\n".join(document_texts)
 
-    print("Relevant Links: \n\n ", all_links)
-    print("Document Text: \n\n ", document_texts)
-    print("\n" + "=" * 50 + "\n")
+    # print("Relevant Links: \n\n ", all_links)
+    # print("Document Text: \n\n ", document_texts)
+    # print("\n" + "=" * 50 + "\n")
     
     return {"combined_text": combined_text, "relevant_links": all_links}
