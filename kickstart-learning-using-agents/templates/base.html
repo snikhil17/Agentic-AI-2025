@@ -5,76 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Adaptive Learning Agent</title>
 
-  <!-- Bootstrap CSS -->
+  <!-- Google Font + Bootstrap -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
   <style>
-    body {
-      background-color: #ffffff;
-      font-family: 'Segoe UI', sans-serif;
+    :root {
+      --brand-start:#007bff;
+      --brand-end:#00aaff;
     }
 
-    .header {
-      background: linear-gradient(90deg, #007bff, #00aaff);
-      color: #ffffff;
-      padding: 20px;
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 20px;
-      box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+    body{
+      /* new soft gradient */
+      min-height:100vh;
+      background:linear-gradient(135deg,#f3f8ff 0%,#e8f3ff 100%);
+      font-family:'Inter', 'Segoe UI', sans-serif;
     }
 
-    .card {
-      border-radius: 12px;
-      border: none;
-      box-shadow: 0 6px 10px rgba(0,0,0,0.08);
+    .header{
+      background:linear-gradient(90deg,var(--brand-start),var(--brand-end));
+      color:#fff;
+      padding:20px;
+      text-align:center;
+      font-size:2rem;
+      margin-bottom:20px;
+      box-shadow:0 3px 6px rgba(0,0,0,.12);
     }
 
-    .form-label {
-      font-weight: 600;
-      color: #0056b3;
+    .card{
+      border:none;
+      border-radius:16px;
+      box-shadow:0 8px 16px rgba(0,0,0,.06);
     }
 
-    .btn-primary {
-      background-color: #007bff;
-      border: none;
+    .form-label{font-weight:600;color:#0056b3;}
+    .btn-primary{
+      background:var(--brand-start);
+      border:none;
+      transition:transform .15s ease;
     }
-
-    .btn-primary:hover {
-      background-color: #0056b3;
-    }
-
-    .chat-container {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .chat-bubble {
-      background-color: #ffffff;
-      border-radius: 12px;
-      padding: 20px 25px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    }
-
-    .markdown-body {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: #333;
-    }
-
-    .markdown-body h1, .markdown-body h2 {
-      color: #007bff;
+    .btn-primary:hover{
+      background:#0056b3;
+      transform:translateY(-2px);
     }
   </style>
 </head>
-
 <body>
   <div class="header">Adaptive Learning Agent</div>
   {% block content %}{% endblock %}
 
-  <!-- Bootstrap JS -->
+  <!-- Bootstrap JS + Marked -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </body>

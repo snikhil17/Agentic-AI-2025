@@ -1,92 +1,103 @@
 {% extends "base.html" %}
-
 {% block content %}
 <div class="container py-4">
   <div class="card shadow-lg p-4">
-    <h2 class="text-center mb-4">Agentic AI Learning Assistant</h2>
+    <h2 class="text-center mb-3">Agentic AI Learning Assistant</h2>
+
+    <!-- NEW: short project blurb -->
+    <p class="text-muted">
+      Enter a topic, your preferred learning style, hobbies, and domain of interest.  
+      The assistant will retrieve curated resources, build an <em>adaptive learning pathway</em>,
+      and generate phase‑by‑phase explanations with history, milestones, hobby‑based examples,
+      projects to try, plus the reference links it used.
+    </p>
+
     <form id="learningForm" method="POST">
       <div class="mb-3">
         <label class="form-label">Preferred Learning Style</label>
-        <input type="text" class="form-control" name="learning_style" placeholder="Intuitive, real-world examples" required>
+        <input type="text" class="form-control" name="learning_style"
+               placeholder="Intuitive, real‑world examples" required>
       </div>
 
       <div class="mb-3">
         <label class="form-label">Learning Topic / Subject</label>
-        <input type="text" class="form-control" name="progress" placeholder="Agentic AI" required>
+        <input type="text" class="form-control" name="progress"
+               placeholder="Agentic AI" required>
       </div>
 
       <div class="mb-3">
         <label class="form-label">Hobbies</label>
-        <input type="text" class="form-control" name="hobby" placeholder="Cricket, Harry Potter" required>
+        <input type="text" class="form-control" name="hobby"
+               placeholder="Cricket, Harry Potter" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Domain / Field of Interest</label>
+        <input type="text" class="form-control" name="domain"
+               placeholder="Healthcare, Finance" required>
+      </div>
+
+      <!-- NEW: API‑key inputs (plain text, can switch to type=password if desired) -->
+      <div class="mb-3">
+        <label class="form-label">Google API Key</label>
+        <input type="text" class="form-control" name="google_api_key"
+               placeholder="Paste your Google API key" required>
       </div>
 
       <div class="mb-4">
-        <label class="form-label">Domain / Field of Interest</label>
-        <input type="text" class="form-control" name="domain" placeholder="Healthcare, Finance" required>
+        <label class="form-label">Tavily API Key</label>
+        <input type="text" class="form-control" name="tavily_api_key"
+               placeholder="Paste your Tavily API key" required>
       </div>
 
       <div class="text-center">
-        <button type="submit" class="btn btn-primary btn-lg">Generate Learning Pathway</button>
+        <button type="submit" class="btn btn-primary btn-lg">
+          Generate Learning Pathway
+        </button>
       </div>
     </form>
   </div>
 </div>
 
-<!-- Loading Modal -->
+<!-- Loading Modal (unchanged) -->
 <div class="modal fade" id="loadingModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content p-4 text-center">
       <div class="spinner-border text-primary mb-3" role="status"></div>
       <h5 id="modalStatus">Initializing...</h5>
       <div class="progress mt-3">
-        <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" 
-             role="progressbar" style="width: 0%"></div>
+        <div id="progressBar"
+             class="progress-bar progress-bar-striped progress-bar-animated"
+             role="progressbar" style="width:0%"></div>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-document.getElementById("learningForm").addEventListener("submit", function(e) {
+document.getElementById("learningForm").addEventListener("submit", function(e){
   e.preventDefault();
-
-  let modal = new bootstrap.Modal(document.getElementById('loadingModal'), {
-    backdrop: 'static',
-    keyboard: false
-  });
+  const modal   = new bootstrap.Modal(document.getElementById('loadingModal'),
+                                      {backdrop:'static', keyboard:false});
   modal.show();
 
-  const updateProgress = (percent, message) => {
-    document.getElementById('progressBar').style.width = percent + '%';
-    document.getElementById('modalStatus').innerText = message;
+  const updateProgress=(p,m)=>{
+    document.getElementById('progressBar').style.width=p+'%';
+    document.getElementById('modalStatus').innerText=m;
   };
 
-  updateProgress(10, "Starting retrieval...");
+  updateProgress(10,"Starting retrieval…");
+  const formData=new FormData(e.target);
 
-  const formData = new FormData(e.target);
-
-  fetch("/", {
-    method: "POST",
-    body: formData
-  })
-  .then(response => {
-    updateProgress(50, "Retrieving Context...");
-    return response.text();
-  })
-  .then(html => {
-    updateProgress(80, "Generating Plan...");
-    setTimeout(() => {
-      updateProgress(100, "Finalizing...");
-      setTimeout(() => {
-        document.open();
-        document.write(html);
-        document.close();
-      }, 500);
-    }, 1000);
-  })
-  .catch(() => {
-    updateProgress(100, "An error occurred!");
-  });
+  fetch("/",{method:"POST",body:formData})
+    .then(r=>{updateProgress(50,"Retrieving context…");return r.text();})
+    .then(html=>{
+      updateProgress(80,"Generating plan…");
+      setTimeout(()=>{updateProgress(100,"Finalizing…");
+        setTimeout(()=>{document.open();document.write(html);document.close();},500);
+      },1000);
+    })
+    .catch(()=>updateProgress(100,"An error occurred!"));
 });
 </script>
 {% endblock %}

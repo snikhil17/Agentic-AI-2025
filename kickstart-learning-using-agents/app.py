@@ -10,7 +10,9 @@ def index():
             "learning_style": request.form.get("learning_style"),
             "progress": request.form.get("progress"),
             "hobby": request.form.get("hobby"),
-            "domain": request.form.get("domain")
+            "domain": request.form.get("domain"),
+            "google_api_key": request.form.get("google_api_key"),
+            "tavily_api_key": request.form.get("tavily_api_key")
         }
         result = adaptive_learning_agent.invoke(student_profile)
         return render_template("result.html", result=result)

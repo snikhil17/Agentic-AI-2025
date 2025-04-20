@@ -7,7 +7,7 @@ from langchain.retrievers.tavily_search_api import TavilySearchAPIRetriever
 load_dotenv()
 
 # Retrieve the Tavily API key from the environment
-tavily_api_key = os.getenv("TAVILY_API_KEY")
+# tavily_api_key = os.getenv("TAVILY_API_KEY")
 
 
 @task
@@ -26,7 +26,9 @@ def perform_retrieval(student_profile: dict) -> dict:
         "learning_style": student_profile.get("learning_style") + f" with respect to {student_profile.get('progress')}"
     }
     
-    retriever = TavilySearchAPIRetriever(k=5)
+    # retriever = TavilySearchAPIRetriever(k=5)
+    retriever = TavilySearchAPIRetriever(k=5,
+                                         api_key=student_profile.get("tavily_api_key"))
     all_docs = []
     all_links = []
     
