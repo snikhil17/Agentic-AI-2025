@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: kickstart-learning
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app  # THIS replaces python app.py
+    autoDeploy: true
