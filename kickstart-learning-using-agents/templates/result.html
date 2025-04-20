@@ -1,48 +1,51 @@
-{% extends "base.html" %}
+  {% extends "base.html" %}
 
-{% block content %}
-<div class="container py-4">
-  <h2 class="mb-4 text-center">Your Adaptive Learning Plan</h2>
+  {% block content %}
+  
+  <div class="container py-4">
+    <h2 class="mb-4 text-center">Your Adaptive Learning Plan</h2>
 
-  <div class="chat-container">
-    <!-- Initial Adaptive Learning Pathway -->
-    <div class="chat-bubble shadow-sm">
-      <h4 class="mb-3">Initial Adaptive Learning Pathway</h4>
-      <div id="initialPlan" class="markdown-body">{{ result.initial_plan | safe }}</div>
+    <div class="chat-container">
+      <!-- Initial Adaptive Learning Pathway -->
+      <div class="chat-bubble shadow-sm">
+        <h4 class="mb-3">Initial Adaptive Learning Pathway</h4>
+        <div id="initialPlan" class="markdown-body">{{ result.initial_plan | safe }}</div>
+      </div>
+
+      <!-- Explanation and Kickstart Examples -->
+      <div class="chat-bubble shadow-sm">
+        <h4 class="mb-3">Explanation and Kickstart Examples</h4>
+        <div id="explanation" class="markdown-body">{{ result.explanation | safe }}</div>
+      </div>
+
+      <!-- Relevant Links -->
+      <div class="chat-bubble shadow-sm">
+        <h4 class="mb-3">Relevant Links</h4>
+        <ul>
+          {% for link in result.relevant_links %}
+            <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
 
-    <!-- Explanation and Kickstart Examples -->
-    <div class="chat-bubble shadow-sm">
-      <h4 class="mb-3">Explanation and Kickstart Examples</h4>
-      <div id="explanation" class="markdown-body">{{ result.explanation | safe }}</div>
-    </div>
-
-    <!-- Relevant Links -->
-    <div class="chat-bubble shadow-sm">
-      <h4 class="mb-3">Relevant Links</h4>
-      <ul>
-        {% for link in result.relevant_links %}
-          <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
-        {% endfor %}
-      </ul>
+    <div class="text-center my-4">
+      <a href="/" class="btn btn-secondary">Try Again</a>
     </div>
   </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Markdown Rendering (Critical fix)
+    const renderMarkdown = (id) => {
+      const element = document.getElementById(id);
+      element.innerHTML = marked.parse(element.textContent.trim());
+    };
 
-  <div class="text-center my-4">
-    <a href="/" class="btn btn-secondary">Try Again</a>
-  </div>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  // Markdown Rendering (Critical fix)
-  const renderMarkdown = (id) => {
-    const element = document.getElementById(id);
-    element.innerHTML = marked.parse(element.textContent.trim());
-  };
-
-  renderMarkdown("initialPlan");    // <-- This was missing or incorrect
-  renderMarkdown("explanation");
-});
-</script>
-{% endblock %}
+    renderMarkdown("initialPlan");    // <-- This was missing or incorrect
+    renderMarkdown("explanation");
+  });
+  </script>
+  {% endblock %}
