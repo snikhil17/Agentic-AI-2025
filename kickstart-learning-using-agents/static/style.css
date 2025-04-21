@@ -1,0 +1,93 @@
+
+:root {
+    --brand-start: #007bff;
+    --brand-end: #00aaff;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f3f8ff 0%, #e8f3ff 100%);
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.header {
+    background: linear-gradient(90deg, var(--brand-start), var(--brand-end));
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .12);
+}
+
+.card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, .06);
+}
+
+.form-label {
+    font-weight: 600;
+    color: #0056b3;
+}
+
+.btn-primary {
+    background: var(--brand-start);
+    border: none;
+    transition: transform .15s ease;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* ✅ Markdown Enhancements */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.chat-bubble {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.markdown-body {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #333;
+}
+
+.markdown-body h1, 
+.markdown-body h2, 
+.markdown-body h3 {
+    color: var(--brand-start);
+    font-weight: 700;
+}
+
+.markdown-body ul {
+    padding-left: 1.2em;
+}
+
+.markdown-body li {
+    margin-bottom: 0.5em;
+}
+
+.markdown-body code {
+    background-color: #f6f8fa;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: monospace;
+    color: #d63384;
+}
+
+.markdown-body pre {
+    background: #f0f3f7;
+    padding: 12px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
