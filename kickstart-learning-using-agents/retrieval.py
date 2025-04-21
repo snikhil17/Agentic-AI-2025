@@ -1,7 +1,8 @@
 from dotenv import load_dotenv
 import os
 from langgraph.func import task
-from langchain.retrievers.tavily_search_api import TavilySearchAPIRetriever
+# from langchain.retrievers.tavily_search_api import TavilySearchAPIRetriever
+from langchain_community.retrievers import TavilySearchAPIRetriever
 
 # Load environment variables
 load_dotenv()
@@ -27,7 +28,7 @@ def perform_retrieval(student_profile: dict) -> dict:
     }
     
     
-    retriever = TavilySearchAPIRetriever(k=5,
+    retriever = TavilySearchAPIRetriever(k=2,
                                          api_key=student_profile.get("tavily_api_key"))
     all_docs = []
     all_links = []
