@@ -22,6 +22,7 @@ def generate_initial_plan(student_profile: dict, combined_text: str) -> str:
         "Generate an adaptive learning pathway in Markdown format (do NOT use markdown code fences like ```markdown).\n"
     "Organize clearly using #, ##, ### headings, bullet points, numbered lists, bold (**text**), and italics (*text*).\n"
     "Make it easy to read, similar to ChatGPT style."
+    "Make it only till 3-Phase or Heading"
     )
 
     

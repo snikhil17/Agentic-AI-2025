@@ -21,6 +21,7 @@ def generate_explanation(pathway: str, student_profile: dict) -> str:
         f"**Adaptive Learning Pathway (Reference)**:\n{pathway}\n\n"
          "Generate an adaptive learning pathway in plain markdown format (WITHOUT markdown code fences). "
     "Organize clearly using #, ##, bullet points, and lists."
+    "Make it only till 3 topics."
     )
 
     
