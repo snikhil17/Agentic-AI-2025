@@ -27,7 +27,7 @@ def perform_retrieval(student_profile: dict) -> dict:
     }
     
     # retriever = TavilySearchAPIRetriever(k=5)
-    retriever = TavilySearchAPIRetriever(k=5,
+    retriever = TavilySearchAPIRetriever(k=8,
                                          api_key=student_profile.get("tavily_api_key"))
     all_docs = []
     all_links = []
