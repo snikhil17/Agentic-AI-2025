@@ -7,7 +7,7 @@ def generate_explanation(pathway: str, student_profile: dict) -> str:
     """
     Generates a detailed explanation and kickstart examples in Markdown format.
     """
-    model = ChatGoogleGenerativeAI(model="gemini-2.0-flash",
+    model = ChatGoogleGenerativeAI(model="gemini-2.5-flash",
                                    api_key=student_profile.get("google_api_key"))
     explanation_template = (
         "Based on the following adaptive learning pathway, generate an extensive yet concise explanation for each topic. "
