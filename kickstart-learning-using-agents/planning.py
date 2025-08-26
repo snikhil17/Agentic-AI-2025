@@ -8,7 +8,7 @@ def generate_initial_plan(student_profile: dict, combined_text: str) -> str:
     Generates an adaptive learning pathway in Markdown format based on
     the student profile and retrieved context.
     """
-    model = ChatGoogleGenerativeAI(model="gemini-2.0-flash",
+    model = ChatGoogleGenerativeAI(model="gemini-2.5-flash",
                                    api_key=student_profile.get("google_api_key"))
     prompt = (
         f"Generate an adaptive learning pathway in Markdown format for a student with the following profile:\n\n"

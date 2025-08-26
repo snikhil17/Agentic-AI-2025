@@ -1,0 +1,253 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- base.html essential includes -->
+<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white text-center py-4">
+          <h1 class="mb-2">🧠 Agentic AI Learning Mastery</h1>
+          <p class="mb-0 lead">AI-Powered Personalized Education at Scale</p>
+        </div>
+        
+        <div class="card-body p-4">
+          <!-- Enhanced project description -->
+          <div class="alert alert-light border-primary mb-4">
+            <h5 class="text-primary mb-3">🚀 Transform Your Learning Experience</h5>
+            <p class="mb-3">
+              Experience the future of education with our <strong>advanced AI learning architect</strong> that creates 
+              completely personalized learning journeys tailored to your unique cognitive style, interests, and goals.
+            </p>
+            
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <h6 class="text-success">🎯 What Makes Us Different:</h6>
+                <ul class="list-unstyled small">
+                  <li>✨ <strong>Multi-dimensional research</strong> from 12+ strategic sources</li>
+                  <li>🧠 <strong>Learning science principles</strong> embedded in every pathway</li>
+                  <li>🎭 <strong>Hobby-based analogies</strong> that make complex topics intuitive</li>
+                  <li>🏢 <strong>Industry-specific applications</strong> for immediate relevance</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <h6 class="text-info">📚 Your Journey Includes:</h6>
+                <ul class="list-unstyled small">
+                  <li>📜 <strong>Rich historical context</strong> and breakthrough moments</li>
+                  <li>🛠️ <strong>Progressive hands-on projects</strong> from beginner to expert</li>
+                  <li>🔗 <strong>Curated premium resources</strong> from top institutions</li>
+                  <li>🚀 <strong>Future-ready skills</strong> and career pathways</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <small class="text-muted">
+                <i class="fas fa-magic me-1"></i>
+                Powered by Google Gemini 2.5 Flash + Advanced Retrieval + Learning Science
+              </small>
+            </div>
+          </div>
+
+          <form id="learningForm" method="POST">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">
+                  <i class="fas fa-brain me-2 text-primary"></i>Preferred Learning Style
+                </label>
+                <input type="text" class="form-control form-control-lg" name="learning_style"
+                       placeholder="Visual, hands-on, conceptual, step-by-step..."
+                       value="Intuitive and real‑world examples" required>
+                <small class="form-text text-muted">How do you learn best? Be specific!</small>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">
+                  <i class="fas fa-target me-2 text-success"></i>Learning Topic / Subject
+                </label>
+                <input type="text" class="form-control form-control-lg" name="progress"
+                       placeholder="Machine Learning, Quantum Computing, Digital Marketing..."
+                       value="Agentic AI" required>
+                <small class="form-text text-muted">What do you want to master?</small>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">
+                  <i class="fas fa-heart me-2 text-danger"></i>Hobbies & Interests
+                </label>
+                <input type="text" class="form-control form-control-lg" name="hobby"
+                       placeholder="Photography, Cooking, Gaming, Sports..."
+                       value="Cricket, Harry Potter" required>
+                <small class="form-text text-muted">We'll use these to create memorable analogies!</small>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">
+                  <i class="fas fa-building me-2 text-info"></i>Domain / Industry Focus
+                </label>
+                <input type="text" class="form-control form-control-lg" name="domain"
+                       placeholder="Healthcare, Finance, Education, Tech Startups..."
+                       value="Healthcare" required>
+                <small class="form-text text-muted">Where will you apply this knowledge?</small>
+              </div>
+            </div>
+
+            <!-- API Keys Section with Enhanced Security Notice -->
+            <div class="alert alert-warning border-warning mb-3">
+              <h6 class="alert-heading">
+                <i class="fas fa-key me-2"></i>API Configuration Required
+              </h6>
+              <p class="mb-2">
+                Our advanced AI system requires access to premium research and generation capabilities. 
+                Your keys are used only for this session and are not stored.
+              </p>
+              <small class="text-muted">
+                <strong>Get your keys:</strong> 
+                <a href="https://makersuite.google.com/app/apikey" target="_blank" class="alert-link">Google AI Studio</a> | 
+                <a href="https://tavily.com/" target="_blank" class="alert-link">Tavily Search</a>
+              </small>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">
+                  <i class="fab fa-google me-2 text-primary"></i>Google AI API Key
+                </label>
+                <input type="password" class="form-control" name="google_api_key"
+                       placeholder="AIza..." required>
+                <small class="form-text text-muted">For AI-powered content generation</small>
+              </div>
+
+              <div class="col-md-6 mb-4">
+                <label class="form-label fw-bold">
+                  <i class="fas fa-search me-2 text-success"></i>Tavily API Key
+                </label>
+                <input type="password" class="form-control" name="tavily_api_key"
+                       placeholder="tvly-..." required>
+                <small class="form-text text-muted">For comprehensive research retrieval</small>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary btn-lg px-5 py-3">
+                <i class="fas fa-rocket me-2"></i>
+                Generate My Learning Mastery Journey
+              </button>
+              <br>
+              <small class="text-muted mt-2 d-block">
+                🔮 Typically generates 2-3 comprehensive learning documents in 30-60 seconds
+              </small>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Enhanced Loading Modal with Better UX -->
+<div class="modal fade" id="loadingModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg">
+      <div class="modal-body p-5 text-center">
+        <div class="spinner-grow text-primary mb-3" style="width: 4rem; height: 4rem;" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <h4 id="modalStatus" class="mb-3 text-primary">Initializing AI Learning Architect...</h4>
+        
+        <div class="progress mb-3" style="height: 8px;">
+          <div id="progressBar"
+               class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+               role="progressbar" style="width:0%"></div>
+        </div>
+        
+        <div id="currentTask" class="text-muted">
+          <small>Preparing to revolutionize your learning experience...</small>
+        </div>
+        
+        <!-- Fun facts during loading -->
+        <div class="mt-4 p-3 bg-light rounded">
+          <small class="text-muted" id="loadingFact">
+            💡 <strong>Did you know?</strong> Personalized learning can improve retention by up to 60%!
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById("learningForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  
+  const modal = new bootstrap.Modal(document.getElementById('loadingModal'), {
+    backdrop: 'static', 
+    keyboard: false
+  });
+  modal.show();
+
+  // Enhanced progress tracking with educational facts
+  const facts = [
+    "💡 Personalized learning can improve retention by up to 60%!",
+    "🧠 The brain forms new neural pathways when learning through multiple senses!",
+    "🎯 Spaced repetition increases long-term retention by 50-60%!",
+    "🚀 AI-powered education adapts to your unique cognitive fingerprint!",
+    "🔬 Active learning strategies improve comprehension by 70%!"
+  ];
+
+  let factIndex = 0;
+  const factRotation = setInterval(() => {
+    document.getElementById('loadingFact').innerHTML = facts[factIndex % facts.length];
+    factIndex++;
+  }, 3000);
+
+  const updateProgress = (percent, message, task = "") => {
+    document.getElementById('progressBar').style.width = percent + '%';
+    document.getElementById('modalStatus').innerText = message;
+    document.getElementById('currentTask').innerHTML = `<small>${task}</small>`;
+  };
+
+  // Enhanced progress simulation
+  updateProgress(5, "🔍 Initializing Strategic Research...", "Connecting to premium knowledge sources");
+  
+  const formData = new FormData(e.target);
+
+  fetch("/", {method: "POST", body: formData})
+    .then(response => {
+      updateProgress(25, "📚 Performing Multi-Dimensional Retrieval...", "Analyzing 12+ strategic information sources");
+      return response.text();
+    })
+    .then(html => {
+      updateProgress(50, "🧠 Generating Personalized Pathway...", "AI architect crafting your unique learning experience");
+      
+      setTimeout(() => {
+        updateProgress(75, "🎯 Creating Deep Learning Experience...", "Integrating hobby-based analogies and domain applications");
+        
+        setTimeout(() => {
+          updateProgress(95, "✨ Finalizing Your Mastery Journey...", "Adding finishing touches to your personalized content");
+          
+          setTimeout(() => {
+            clearInterval(factRotation);
+            updateProgress(100, "🎉 Your Learning Journey is Ready!", "Redirecting to your personalized experience...");
+            
+            setTimeout(() => {
+              document.open();
+              document.write(html);
+              document.close();
+            }, 1000);
+          }, 1500);
+        }, 2000);
+      }, 2000);
+    })
+    .catch(error => {
+      clearInterval(factRotation);
+      updateProgress(100, "❌ Oops! Something went wrong", "Please check your API keys and try again");
+      console.error('Error:', error);
+    });
+});
+</script>
+{% endblock %}
