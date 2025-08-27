@@ -1,0 +1,49 @@
+# Git files
+.git
+.gitignore
+
+# Environment files
+.env
+.env.local
+
+# Python cache
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+pip-log.txt
+
+# Virtual environments
+venv/
+kickstart_env/
+env/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node.js (for React frontend)
+adaptive-learning-agent/node_modules/
+adaptive-learning-agent/dist/
+adaptive-learning-agent/.vite/
+
+# Documentation
+README.md
+ENHANCEMENTS.md
+images/
+
+# Logs
+*.log
+logs/
+
+# Test files
+tests/
+pytest.ini
+.coverage

@@ -4,5 +4,5 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --worker-class gevent --timeout 240
+    startCommand: uvicorn app_fastapi_new:app --host 0.0.0.0 --port $PORT --timeout-keep-alive 240
     autoDeploy: true
