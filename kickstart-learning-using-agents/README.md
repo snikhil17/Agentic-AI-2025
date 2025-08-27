@@ -1,6 +1,20 @@
 # 🚀 Kickstart AI Learning – Personalized Pathways Using Your Interests
 
-**Kickstart** is an intelligent learning assistant powered by Agentic AI that transforms how you learn by creating personalized educational pathways tailored to **your hobbies**, **learning style**, and **domain interests**.
+**Kickstart** is an int### Backend
+- **🤖 LangGraph 0.3.31** - Agentic AI orchestration
+- **🧠 Google Gemini 2.5 Flash** - Language model for content generation
+- **🔍 Tavily API** - Real-time web search and research
+- **⚡ FastAPI 0.115.6** - Modern async web framework
+-└── �️ Archive
+    └── archive/                 # Moved unused/legacy files
+        ├── backend_versions/    # Flask & old FastAPI
+        ├── templates_legacy/    # HTML templates (moved)
+        ├── unused_modules/      # Deprecated Python modules
+        ├── scripts_and_config/ # Setup scripts & Docker  
+        ├── frontend_assets/     # Old static files
+        ├── cache/              # Python cache files
+        └── README.md           # Archive documentationPydantic** - Structured data validation and API models
+- **🔄 Uvicorn** - ASGI server for high performancent learning assistant powered by Agentic AI that transforms how you learn by creating personalized educational pathways tailored to **your hobbies**, **learning style**, and **domain interests**.
 
 Whether you're passionate about **Cricket**, fascinated by **Harry Potter**, or love **Photography**, Kickstart uses your interests as bridges to make complex topics engaging, memorable, and relevant to your life.
 
@@ -40,7 +54,7 @@ Kickstart leverages **Agentic AI architecture** with **LangGraph** to create tru
 ✅ **Real-Time Research** - Latest trends and developments via Tavily API  
 ✅ **Historical Context** - Rich background with key milestones  
 ✅ **Project Ideas** - Practical applications in your domain  
-✅ **Dual Interfaces** - CLI for developers, Web UI for general users  
+✅ **Multiple Interfaces** - React web app, FastAPI backend, CLI for developers  
 ✅ **Agentic Architecture** - Intelligent task orchestration with LangGraph  
 
 ---
@@ -87,7 +101,7 @@ graph LR
 2. **`retrieval.py`** - Tavily-powered research and context gathering
 3. **`structured_agent.py`** - Gemini-based pathway generation
 4. **`explanation.py`** - Hobby-specific content creation
-5. **`app.py`** - Flask web interface
+5. **`app_fastapi_new.py`** - FastAPI backend with async endpoints
 6. **`main.py`** - CLI interface
 
 ---
@@ -109,8 +123,65 @@ graph LR
 
 ### Deployment
 - **☁️ Render.com** - Cloud platform
-- **🦄 Gunicorn** - WSGI server
-- **🔧 Gevent** - Async worker handling
+- **🦄 Uvicorn** - ASGI server for FastAPI
+- **🔧 Async Workers** - High-performance request handling
+
+---
+
+## 🚀 FastAPI Backend Features
+
+### API Endpoints
+
+Our FastAPI backend provides several endpoints for different use cases:
+
+#### **Health Check**
+```http
+GET /health
+```
+Returns server status and basic system information.
+
+#### **Generate Learning Pathway (Direct)**
+```http
+POST /api/generate-pathway-direct
+Content-Type: application/json
+
+{
+  "learning_style": "Interactive examples",
+  "progress": "Python basics", 
+  "hobby": "Gaming",
+  "domain": "Software Development",
+  "google_api_key": "your_google_api_key",
+  "tavily_api_key": "your_tavily_api_key"
+}
+```
+
+#### **Generate Learning Pathway (React Frontend)**
+```http
+POST /api/generate-pathway
+Content-Type: application/json
+
+{
+  "learningStyle": "Interactive examples",
+  "topic": "Python basics",
+  "hobbies": "Gaming", 
+  "domain": "Software Development"
+}
+```
+*Note: This endpoint uses environment variables for API keys*
+
+### Interactive API Documentation
+
+FastAPI automatically generates interactive API documentation:
+- **Swagger UI**: `http://localhost:8000/docs`
+- **ReDoc**: `http://localhost:8000/redoc`
+
+### Performance Benefits
+
+- **Async Support**: Native async/await for better concurrency
+- **Type Safety**: Full Pydantic validation for requests/responses  
+- **Auto Documentation**: OpenAPI/Swagger docs generated automatically
+- **Better Error Handling**: Structured error responses
+- **CORS Support**: Built-in CORS middleware for frontend integration
 
 ---
 
@@ -122,7 +193,7 @@ graph LR
 - **Google API Key** (for Gemini AI)
 - **Tavily API Key** (for web search)
 
-### Option 1: Web Interface (Recommended)
+### Option 1: FastAPI Backend + React Frontend (Recommended)
 
 1. **Clone the repository**
    ```bash
@@ -147,29 +218,43 @@ graph LR
    pip install -r requirements.txt
    ```
 
-4. **Configure environment variables**
+4. **Configure environment variables (Optional)**
    ```bash
-   # Create .env file
+   # Create .env file (API keys can also be provided via UI)
    cp .env.example .env
    
-   # Edit .env file with your API keys
+   # Edit .env file with your API keys (optional)
    echo "GOOGLE_API_KEY=your_google_api_key_here" >> .env
    echo "TAVILY_API_KEY=your_tavily_api_key_here" >> .env
    ```
 
-5. **Run the Flask web server**
+5. **Start the FastAPI backend server**
    ```bash
-   python app.py
+   python -m uvicorn app_fastapi_new:app --reload --host 0.0.0.0 --port 8000
    ```
+   The FastAPI server will be available at `http://localhost:8000`
 
-6. **Access the application**
-   - Open your browser to `http://localhost:5000`
-   - Fill in your learning preferences
+6. **Set up React frontend (in a new terminal)**
+   ```bash
+   cd adaptive-learning-agent
+   npm install
+   
+   # Configure frontend environment
+   echo "VITE_API_URL=http://localhost:8000" > .env.local
+   
+   # Start React development server
+   npm run dev
+   ```
+   The React app will be available at `http://localhost:5173`
+
+7. **Access the application**
+   - Open your browser to `http://localhost:5173`
+   - Fill in your learning preferences and API keys
    - Get your personalized learning pathway!
 
 ### Option 2: CLI Interface (For Developers)
 
-1. **Follow steps 1-4 from above**
+1. **Follow steps 1-3 from Option 1**
 
 2. **Run the CLI version**
    ```bash
@@ -182,34 +267,29 @@ graph LR
    - Your hobbies
    - Domain focus
 
-### Option 3: React Frontend (Advanced)
+### Option 3: Direct API Testing
 
-1. **Complete Python setup (steps 1-4 above)**
+You can also test the FastAPI backend directly using curl or any HTTP client:
 
-2. **Set up React frontend**
-   ```bash
-   cd adaptive-learning-agent
-   npm install
-   ```
+```bash
+# Start FastAPI server
+python -m uvicorn app_fastapi_new:app --reload --host 0.0.0.0 --port 8000
 
-3. **Configure frontend environment**
-   ```bash
-   # Create environment file
-   echo "VITE_API_URL=http://localhost:5000" > .env.local
-   ```
+# Test health endpoint
+curl http://localhost:8000/health
 
-4. **Run both servers**
-   ```bash
-   # Terminal 1: Python backend
-   cd ..
-   python app.py
-   
-   # Terminal 2: React frontend
-   cd adaptive-learning-agent
-   npm run dev
-   ```
-
-5. **Access React app at** `http://localhost:5173`
+# Test learning pathway generation
+curl -X POST http://localhost:8000/api/generate-pathway-direct \
+  -H "Content-Type: application/json" \
+  -d '{
+    "learning_style": "Interactive examples", 
+    "progress": "Python basics",
+    "hobby": "Gaming",
+    "domain": "Software Development",
+    "google_api_key": "your_google_api_key",
+    "tavily_api_key": "your_tavily_api_key"
+  }'
+```
 
 ---
 
@@ -240,32 +320,44 @@ TAVILY_API_KEY=tvly-your-actual-key-here
 
 ```
 kickstart-learning-using-agents/
-├── 🤖 Core Agent Files
-│   ├── agent.py                 # Main LangGraph entrypoint
-│   ├── structured_agent.py      # Gemini-powered pathway generation
+├── 🤖 Core Agent System
+│   ├── agent.py                 # Main LangGraph entrypoint  
 │   ├── retrieval.py             # Tavily search & research
+│   ├── structured_agent.py      # Gemini pathway generation
 │   ├── explanation.py           # Hobby-specific content creation
-│   ├── planning.py              # Learning pathway planning
 │   └── data_models.py           # Pydantic data structures
-├── 🌐 Web Interface
-│   ├── app.py                   # Flask web application
-│   ├── main.py                  # CLI interface
-│   └── templates/               # Jinja2 HTML templates
-│       ├── index.html           # Input form
-│       ├── result.html          # Learning pathway display
-│       └── base.html            # Base template
+├── 🌐 Backend API
+│   ├── app_fastapi_new.py       # FastAPI backend server (API-only)
+│   └── main.py                  # CLI interface
 ├── ⚛️ React Frontend
-│   └── adaptive-learning-agent/
-│       ├── App.tsx              # Main React app
+│   └── adaptive-learning-agent/ # Complete React application
+│       ├── App.tsx              # Main React component
 │       ├── components/          # UI components
 │       ├── services/            # API integration
 │       └── types.ts             # TypeScript definitions
 ├── 📋 Configuration
 │   ├── requirements.txt         # Python dependencies
-│   ├── render.yaml              # Deployment config
-│   └── .env.example            # Environment template
-└── 📸 Assets
-    └── images/                  # Screenshots and demos
+│   ├── requirements-dev.txt     # Development dependencies
+│   ├── render.yaml              # Deployment configuration
+│   ├── .env.example            # Environment template
+│   └── .gitignore              # Git ignore rules
+├── 📚 Documentation
+│   ├── README.md                # This file
+│   ├── CONTRIBUTING.md          # Contribution guidelines
+│   ├── ENHANCEMENTS.md          # Enhancement proposals
+│   └── LICENSE                  # MIT license
+├── 🧪 Testing
+│   └── tests/                   # Test files
+├── 📸 Assets
+│   └── images/                  # Screenshots & demos
+└── �️ Archive
+    └── archive/                 # Moved unused/legacy files
+        ├── backend_versions/    # Flask & old FastAPI
+        ├── unused_modules/      # Deprecated Python modules
+        ├── scripts_and_config/ # Setup scripts & Docker  
+        ├── frontend_assets/     # Old static files
+        ├── cache/              # Python cache files
+        └── README.md           # Archive documentation
 ```
 
 ---
@@ -295,11 +387,14 @@ retriever = TavilySearchAPIRetriever(
 
 ### Adding Custom Learning Styles
 
-Edit the form options in `templates/index.html`:
-```html
-<option value="visual-learner">Visual Learning with Diagrams</option>
-<option value="hands-on">Hands-on Project-Based Learning</option>
-<option value="theoretical">Deep Theoretical Understanding</option>
+Edit the form options in the React frontend:
+```typescript
+// In adaptive-learning-agent/types.ts or components
+const learningStyleOptions = [
+  { value: "visual-learner", label: "Visual Learning with Diagrams" },
+  { value: "hands-on", label: "Hands-on Project-Based Learning" },
+  { value: "theoretical", label: "Deep Theoretical Understanding" }
+];
 ```
 
 ---
@@ -309,7 +404,7 @@ Edit the form options in `templates/index.html`:
 ### Quick Health Check
 ```bash
 # Test Python dependencies
-python -c "import langchain, flask; print('Dependencies OK')"
+python -c "import langgraph, fastapi; print('Dependencies OK')"
 
 # Test API connectivity
 python -c "
@@ -346,24 +441,41 @@ python main.py
    - Create new Web Service
    - Connect your forked repository
 
-3. **Configure Environment Variables**
+3. **Update render.yaml for FastAPI**
+   ```yaml
+   services:
+     - type: web
+       name: kickstart-learning-fastapi
+       env: python
+       buildCommand: "pip install -r requirements.txt"
+       startCommand: "uvicorn app_fastapi_new:app --host 0.0.0.0 --port $PORT"
+       envVars:
+         - key: PYTHON_VERSION
+           value: "3.11"
+   ```
+
+4. **Configure Environment Variables**
    ```
    GOOGLE_API_KEY = your_google_api_key
    TAVILY_API_KEY = your_tavily_api_key
    ```
 
-4. **Deploy**
-   - Render will automatically use `render.yaml` configuration
+5. **Deploy**
+   - Render will automatically use the updated configuration
    - Build time: ~5-10 minutes
-   - Your app will be live at `https://your-app-name.onrender.com`
+   - Your FastAPI app will be live at `https://your-app-name.onrender.com`
+
+6. **API Documentation**
+   - FastAPI auto-generates interactive docs at `/docs`
+   - Visit `https://your-app-name.onrender.com/docs` for API testing
 
 ### Deploy to Other Platforms
 
 **Heroku**
 ```bash
-# Add Procfile
-echo "web: gunicorn app:app --workers 1 --timeout 240" > Procfile
-git add . && git commit -m "Deploy to Heroku"
+# Add Procfile for FastAPI
+echo "web: uvicorn app_fastapi_new:app --host 0.0.0.0 --port \$PORT" > Procfile
+git add . && git commit -m "Deploy FastAPI to Heroku"
 heroku create your-app-name
 heroku config:set GOOGLE_API_KEY=your_key
 heroku config:set TAVILY_API_KEY=your_key
@@ -377,8 +489,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY . .
-EXPOSE 5000
-CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:5000"]
+EXPOSE 8000
+CMD ["uvicorn", "app_fastapi_new:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
 ---
@@ -445,11 +557,30 @@ pip install --upgrade -r requirements.txt
 
 **❌ "Port already in use" Error**
 ```bash
-# Kill process using port 5000
-lsof -ti:5000 | xargs kill -9
+# Kill process using port 8000 (FastAPI)
+lsof -ti:8000 | xargs kill -9
 # Or use different port
-python app.py --port 5001
+python -m uvicorn app_fastapi_new:app --port 8001
 ```
+
+**❌ "python-multipart not found" Error (FastAPI)**
+```bash
+# Install missing FastAPI dependency
+pip install python-multipart
+```
+
+**❌ "CORS Error" in React Frontend**
+```bash
+# Check if FastAPI server is running on correct port
+curl http://localhost:8000/health
+# Update React .env.local if needed
+echo "VITE_API_URL=http://localhost:8000" > adaptive-learning-agent/.env.local
+```
+
+**❌ "422 Unprocessable Entity" (FastAPI)**
+- Check your JSON payload matches the expected format
+- Use `/docs` endpoint to see exact schema requirements
+- Ensure all required fields are included
 
 **❌ "Tavily API Limit Exceeded"**
 - Free tier: 1000 requests/month
@@ -465,10 +596,14 @@ npm run dev
 
 ### Debug Mode
 
-Enable detailed logging:
+Enable detailed logging in FastAPI:
 ```python
-# In app.py
-app.run(debug=True, host='0.0.0.0', port=5000)
+# In app_fastapi_new.py
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
+# Run with debug reload
+python -m uvicorn app_fastapi_new:app --reload --log-level debug
 ```
 
 Check logs:
@@ -533,6 +668,14 @@ tail -f logs/agent.log
 ---
 
 ## 📈 Roadmap & Future Features
+
+### ✅ Recently Completed (v1.5)
+- [x] **FastAPI Migration Complete** - Fully migrated from Flask to FastAPI
+- [x] **Modern Async Backend** - High-performance API with native async support
+- [x] **Interactive API Docs** - Auto-generated Swagger/ReDoc documentation
+- [x] **CORS Support** - Seamless React frontend integration
+- [x] **Type-Safe APIs** - Full Pydantic validation for all endpoints
+- [x] **Project Organization** - Moved legacy files to `older_version/` folder
 
 ### 🔄 Version 2.0 (Coming Soon)
 - [ ] **Multi-language Support** - Learn in your preferred language
