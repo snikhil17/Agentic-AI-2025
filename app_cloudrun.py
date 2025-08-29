@@ -49,18 +49,8 @@ app = FastAPI(
 # Add CORS middleware - optimized for production
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://*.vercel.app",  # Vercel deployments
-        "https://*.netlify.app",  # Netlify deployments  
-        "https://*.onrender.com", # Render deployments
-        "https://*.run.app",      # Cloud Run deployments
-        "http://localhost:3000",  # Local React dev
-        "http://localhost:5173",  # Local Vite dev
-        "http://localhost:5174",  # Local Vite dev alt
-        "http://localhost:4173",  # Local Vite preview
-        "https://agentic-ai-2025-cr4e.vercel.app/"
-    ],
-    allow_credentials=True,
+    allow_origins=["*"],  # Allow all origins for public API
+    allow_credentials=False,  # Disable credentials to allow wildcard
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
     max_age=600,  # Cache preflight requests for 10 minutes
