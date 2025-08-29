@@ -22,8 +22,8 @@ app.add_middleware(
         "http://localhost:5173", 
         "http://localhost:5174", 
         "http://localhost:4173",
-        "https://your-react-app.vercel.app",  # Add production frontend URL when deployed
-        "https://kickstart-learning.onrender.com"  # Current deployment URL
+        "https://agentic-ai-2025-cr4e.vercel.app/",  # Add production frontend URL when deployed
+        "https://agentic-ai-2025-cr4e.vercel.app/"  # Current deployment URL
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -53,7 +53,7 @@ async def root():
         "version": "1.0.0",
         "docs": "/docs",
         "health": "/health",
-        "react_frontend": "http://localhost:5173"
+        "react_frontend": "https://agentic-ai-2025-cr4e.vercel.app/"
     }
 
 @app.post("/api/generate-pathway")
@@ -66,8 +66,6 @@ async def generate_pathway_api(preferences: ReactLearningPreferences):
             "progress": preferences.topic,  # React uses 'topic', backend uses 'progress'
             "hobby": preferences.hobbies,
             "domain": preferences.domain,
-            "google_api_key": os.getenv("GOOGLE_API_KEY", ""),
-            "tavily_api_key": os.getenv("TAVILY_API_KEY", "")
         }
         
         result = adaptive_learning_agent.invoke(student_profile)
