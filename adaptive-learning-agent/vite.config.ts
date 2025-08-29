@@ -4,7 +4,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://learning-pathway-428472674191.us-west1.run.app',
+        target: 'https://ai-learning-pathway-428472674191.europe-west1.run.app',
         changeOrigin: true,
       }
     }
