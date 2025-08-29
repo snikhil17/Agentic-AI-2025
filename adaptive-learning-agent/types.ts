@@ -4,8 +4,6 @@ export interface LearningPreferences {
   topic: string;
   hobbies: string;
   domain: string;
-  googleApiKey: string;
-  tavilyApiKey: string;
 }
 
 export interface PathwayPhase {

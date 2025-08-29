@@ -42,8 +42,6 @@ const InputForm: React.FC<InputFormProps> = ({ onGenerate, error }) => {
     topic: 'generative AI',
     hobbies: 'watching friends on Netflix',
     domain: 'finance',
-    googleApiKey: '',
-    tavilyApiKey: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,39 +87,6 @@ const InputForm: React.FC<InputFormProps> = ({ onGenerate, error }) => {
           <InputField id="topic" label="Learning Topic / Subject" value={preferences.topic} onChange={handleChange} placeholder="e.g., Quantum Computing, History of Rome" icon={<BookIcon />} />
           <InputField id="hobbies" label="Hobbies" value={preferences.hobbies} onChange={handleChange} placeholder="e.g., Playing guitar, hiking, video games" icon={<HobbyIcon />} />
           <InputField id="domain" label="Domain / Field of Interest" value={preferences.domain} onChange={handleChange} placeholder="e.g., Healthcare, software development" icon={<DomainIcon />} />
-          
-          <div className="bg-slate-900/40 p-6 rounded-lg border border-slate-600">
-            <h3 className="text-lg font-semibold text-slate-200 mb-4 flex items-center gap-2">
-              🔑 API Keys Required
-            </h3>
-            <p className="text-slate-400 text-sm mb-4">
-              This app requires API keys to generate personalized content. Your keys are sent directly to the backend and not stored.
-            </p>
-            <div className="space-y-4">
-              <InputField 
-                id="googleApiKey" 
-                label="Google API Key (Gemini)" 
-                value={preferences.googleApiKey} 
-                onChange={handleChange} 
-                placeholder="Your Google AI Studio API key" 
-                icon={<SparklesIcon />} 
-                type="password"
-              />
-              <InputField 
-                id="tavilyApiKey" 
-                label="Tavily API Key" 
-                value={preferences.tavilyApiKey} 
-                onChange={handleChange} 
-                placeholder="Your Tavily search API key" 
-                icon={<SparklesIcon />} 
-                type="password"
-              />
-            </div>
-            <div className="mt-3 text-xs text-slate-400">
-              <p>• Get Google API key: <a href="https://ai.google.dev/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Google AI Studio</a></p>
-              <p>• Get Tavily API key: <a href="https://app.tavily.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Tavily Dashboard</a></p>
-            </div>
-          </div>
           
           <button type="submit" className="w-full flex justify-center items-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-lg py-4 px-6 rounded-lg shadow-lg hover:from-blue-500 hover:to-purple-500 focus:outline-none focus:ring-4 focus:ring-blue-400/50 transition-all transform hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(96,165,250,0.5)]">
             <SparklesIcon />
