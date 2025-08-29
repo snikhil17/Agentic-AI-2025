@@ -79,6 +79,8 @@ class ReactLearningPreferences(BaseModel):
     topic: str
     hobbies: str
     domain: str
+    googleApiKey: str
+    tavilyApiKey: str
 
 @app.get("/")
 async def root():
@@ -114,28 +116,29 @@ async def generate_pathway_api(preferences: ReactLearningPreferences):
     try:
         logger.info(f"Received pathway generation request for topic: {preferences.topic}")
         
+        # Validate API keys from request
+        if not preferences.googleApiKey or not preferences.tavilyApiKey:
+            raise HTTPException(
+                status_code=400, 
+                detail="API keys are required. Please provide both Google API key and Tavily API key."
+            )
+        
         # Map React frontend format to backend format
         student_profile = {
             "learning_style": preferences.learningStyle,
             "progress": preferences.topic,  # React uses 'topic', backend uses 'progress'
             "hobby": preferences.hobbies,
             "domain": preferences.domain,
-            "google_api_key": os.getenv("GOOGLE_API_KEY", ""),
-            "tavily_api_key": os.getenv("TAVILY_API_KEY", "")
+            "google_api_key": preferences.googleApiKey,
+            "tavily_api_key": preferences.tavilyApiKey
         }
-        
-        # Validate API keys
-        if not student_profile["google_api_key"] or not student_profile["tavily_api_key"]:
-            logger.error("Missing API keys in environment variables")
-            raise HTTPException(
-                status_code=500, 
-                detail="API keys not configured. Please set GOOGLE_API_KEY and TAVILY_API_KEY environment variables."
-            )
         
         result = adaptive_learning_agent.invoke(student_profile)
         logger.info("Pathway generation completed successfully")
         return result
         
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Error generating pathway: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
