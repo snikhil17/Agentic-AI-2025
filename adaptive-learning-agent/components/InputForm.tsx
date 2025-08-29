@@ -42,6 +42,8 @@ const InputForm: React.FC<InputFormProps> = ({ onGenerate, error }) => {
     topic: 'generative AI',
     hobbies: 'watching friends on Netflix',
     domain: 'finance',
+    googleApiKey: '',
+    tavilyApiKey: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

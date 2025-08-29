@@ -58,6 +58,7 @@ app.add_middleware(
         "http://localhost:5173",  # Local Vite dev
         "http://localhost:5174",  # Local Vite dev alt
         "http://localhost:4173",  # Local Vite preview
+        "https://agentic-ai-2025-cr4e.vercel.app/"
     ],
     allow_credentials=True,
     allow_methods=["GET", "POST", "OPTIONS"],
@@ -79,8 +80,6 @@ class ReactLearningPreferences(BaseModel):
     topic: str
     hobbies: str
     domain: str
-    googleApiKey: str
-    tavilyApiKey: str
 
 @app.get("/")
 async def root():
@@ -116,21 +115,25 @@ async def generate_pathway_api(preferences: ReactLearningPreferences):
     try:
         logger.info(f"Received pathway generation request for topic: {preferences.topic}")
         
-        # Validate API keys from request
-        if not preferences.googleApiKey or not preferences.tavilyApiKey:
+        # Get API keys from environment variables
+        google_api_key = os.getenv("GOOGLE_API_KEY")
+        tavily_api_key = os.getenv("TAVILY_API_KEY")
+        
+        if not google_api_key or not tavily_api_key:
+            logger.error("API keys not found in environment variables")
             raise HTTPException(
-                status_code=400, 
-                detail="API keys are required. Please provide both Google API key and Tavily API key."
+                status_code=500, 
+                detail="Server configuration error: API keys not configured on server."
             )
         
-        # Map React frontend format to backend format
+        # Map React frontend format to backend format with environment API keys
         student_profile = {
             "learning_style": preferences.learningStyle,
             "progress": preferences.topic,  # React uses 'topic', backend uses 'progress'
             "hobby": preferences.hobbies,
             "domain": preferences.domain,
-            "google_api_key": preferences.googleApiKey,
-            "tavily_api_key": preferences.tavilyApiKey
+            "google_api_key": google_api_key,
+            "tavily_api_key": tavily_api_key
         }
         
         result = adaptive_learning_agent.invoke(student_profile)
@@ -152,11 +155,17 @@ async def generate_pathway_direct_api(profile: StudentProfile):
         # Convert to dict for the agent
         student_profile = profile.dict()
         
-        # Validate API keys
+        # Use provided API keys or fall back to environment variables
+        if not student_profile.get("google_api_key"):
+            student_profile["google_api_key"] = os.getenv("GOOGLE_API_KEY")
+        if not student_profile.get("tavily_api_key"):
+            student_profile["tavily_api_key"] = os.getenv("TAVILY_API_KEY")
+        
+        # Validate API keys are available
         if not student_profile["google_api_key"] or not student_profile["tavily_api_key"]:
             raise HTTPException(
-                status_code=400, 
-                detail="API keys are required. Please provide google_api_key and tavily_api_key."
+                status_code=500, 
+                detail="Server configuration error: API keys not available."
             )
         
         result = adaptive_learning_agent.invoke(student_profile)

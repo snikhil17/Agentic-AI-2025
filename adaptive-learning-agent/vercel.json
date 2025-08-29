@@ -7,7 +7,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://ai-learning-pathway-428472674191.europe-west1.run.app/api/$1"
+      "destination": "https://learning-pathway-428472674191.us-west1.run.app/api/$1"
     }
   ],
   "headers": [

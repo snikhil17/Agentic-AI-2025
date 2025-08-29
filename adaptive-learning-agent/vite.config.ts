@@ -4,7 +4,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
+        target: 'https://learning-pathway-428472674191.us-west1.run.app',
         changeOrigin: true,
       }
     }
